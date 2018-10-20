@@ -73,14 +73,13 @@ class App extends Component {
   }
 
   async delTodo(index) {
-    axios.delete(`${this.apiUrl}/todos/${this.state.todos[index].id}`);
-
-    const response = await axios.get(`${this.apiUrl}/todos`);
+    await axios.delete(`${this.apiUrl}/todos/${this.state.todos[index].id}`);
+    const todos = this.state.todos;
+    delete todos[index];
     this.setState({
-      todos:response.data,
+      todos:todos,
       newToDo: ''
     });
-
     this.alert("TODO deleted successfully");
   }
 
